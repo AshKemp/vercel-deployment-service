@@ -4,6 +4,8 @@ import { buildProject } from "./utils";
 
 const subscriber = createClient();
 subscriber.connect();
+const publisher = createClient();
+subscriber.connect();
 
 async function main() {
   while (1) {
@@ -18,7 +20,8 @@ async function main() {
     await downloadS3Folder(`output/${id}`);
     console.log("downloaded");
     await buildProject(id);
-    await copyFinalDist(id);
+    copyFinalDist(id);
+    await publisher.hSet("status", id, "deployed");
   }
 }
 
