@@ -5,7 +5,7 @@ import { buildProject } from "./utils";
 const subscriber = createClient();
 subscriber.connect();
 const publisher = createClient();
-subscriber.connect();
+publisher.connect();
 
 async function main() {
   while (1) {
